@@ -79,6 +79,14 @@
                 <Enabled>true</Enabled>
                 <Username>vagrant</Username>
             </AutoLogon>
+            <FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>powershell.exe -File a:\winrm.ps1</CommandLine>
+                    <Order>1</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                    <Description>Run script</Description>
+                </SynchronousCommand>
+            </FirstLogonCommands>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="catalog:c:/sources/eval-win2016/install_windows server 2016 serverdatacenter.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
