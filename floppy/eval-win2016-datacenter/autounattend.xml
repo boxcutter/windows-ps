@@ -81,7 +81,7 @@
             </AutoLogon>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>powershell.exe -File a:\winrm.ps1</CommandLine>
+                    <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\00-run-all-scripts.ps1</CommandLine>
                     <Order>1</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                     <Description>Run script</Description>
