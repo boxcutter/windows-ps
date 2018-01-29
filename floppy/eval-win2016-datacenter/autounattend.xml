@@ -18,6 +18,9 @@
                     </InstallFrom>
                 </OSImage>
             </ImageInstall>
+            <UserData>
+                <AcceptEula>true</AcceptEula>
+            </UserData>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="catalog:c:/sources/eval-win2016/install_windows server 2016 serverdatacenter.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
