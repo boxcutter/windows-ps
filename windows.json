@@ -29,6 +29,7 @@
         "numvcpus": "{{ user `cpus` }}",
         "scsi0.virtualDev": "lsisas1068"
       },
+      "vmx_remove_ethernet_interfaces": "true",
       "winrm_password": "vagrant",
       "winrm_timeout": "10000s",
       "winrm_username": "vagrant"
