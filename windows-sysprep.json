@@ -24,6 +24,12 @@
       "tools_upload_flavor": "windows",
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "{{ user `memory` }}",
+        "numvcpus": "{{ user `cpus` }}",
+        "scsi0.virtualDev": "lsisas1068"
+      },
       "winrm_password": "{{ user `winrm_password` }}",
       "winrm_timeout": "10000s",
       "winrm_username": "{{ user `winrm_username` }}"
