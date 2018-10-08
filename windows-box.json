@@ -1,0 +1,54 @@
+{
+  "builders": [
+    {
+      "communicator": "winrm", 
+      "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout": "1h",
+      "source_path": "{{ user `source_path` }}",
+      "type": "vmware-vmx",
+      "vm_name": "{{ user `vm_name` }}",
+      "vmx_data": {
+        "ethernet0.addresstype": "generated",
+        "ethernet0.bsdname": "en0",
+        "ethernet0.connectiontype": "nat",
+        "ethernet0.displayname": "Ethernet",
+        "ethernet0.linkstatepropagation.enable": "FALSE",
+        "ethernet0.pcislotnumber": "33",
+        "ethernet0.present": "TRUE",
+        "ethernet0.virtualdev": "e1000",
+        "ethernet0.vnet": "",
+        "ethernet0.wakeonpcktrcv": "FALSE"
+      },
+      "vmx_remove_ethernet_interfaces": true,
+      "winrm_password": "{{ user `winrm_password` }}",
+      "winrm_timeout": "12h",
+      "winrm_username": "{{ user `winrm_username` }}"
+    } 
+  ],
+  "post-processors": [
+    {
+      "compression_level": 1,
+      "keep_input_artifact": false,
+      "output": "box/{{.Provider}}/{{user `vm_name`}}.box",
+      "type": "vagrant",
+      "vagrantfile_template": "tpl/vagrantfile-eval-win2016-datacenter.tpl"
+    }
+  ],
+  "provisioners": [
+    {
+      "elevated_user": "{{ user `winrm_username` }}",
+      "elevated_password": "{{ user `winrm_password` }}",
+      "scripts": [
+        "script/cleanup.ps1"
+      ],
+      "type": "powershell"
+    }
+  ],
+  "variables": {
+    "source_path": "output-eval-win2016-datacenter-windows-update-vmware-iso/eval-win2016-datacenter-windows-update.vmx",
+    "vm_name": "eval-win2016-datacenter",
+    "winrm_password": "vagrant",
+    "winrm_username": "vagrant"
+  }
+}

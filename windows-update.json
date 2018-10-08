@@ -1,0 +1,43 @@
+{
+  "builders": [
+    {
+      "communicator": "winrm", 
+      "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "shutdown_timeout": "1h",
+      "source_path": "{{ user `source_path` }}",
+      "type": "vmware-vmx",
+      "vm_name": "{{ user `vm_name` }}",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "{{ user `memory` }}",
+        "numvcpus": "{{ user `cpus` }}",
+        "scsi0.virtualDev": "lsisas1068"
+      },
+      "vmx_remove_ethernet_interfaces": true,
+      "winrm_password": "{{ user `winrm_password` }}",
+      "winrm_timeout": "12h",
+      "winrm_username": "{{ user `winrm_username` }}"
+    } 
+  ],
+  "provisioners": [
+    {
+      "elevated_user": "{{ user `winrm_username` }}",
+      "elevated_password": "{{ user `winrm_password` }}",
+      "scripts": [
+        "script/windows_update.ps1"
+      ],
+      "type": "powershell"
+    },
+    {
+      "restart_timeout": "1h",
+      "type": "windows-restart"
+    }
+  ],
+  "variables": {
+    "source_path": "output-eval-win2016-datacenter-sysprep-vmware-iso/eval-win2016-datacenter-sysprep.vmx",
+    "vm_name": "eval-win2016-datacenter-windows-update",
+    "winrm_password": "vagrant",
+    "winrm_username": "vagrant"
+  }
+}

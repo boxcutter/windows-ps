@@ -19,30 +19,15 @@
         "{{ user `iso_path` }}/{{ user `iso_name` }}",
         "{{ user `iso_url` }}"
       ],
+      "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
       "shutdown_command": "{{ user `shutdown_command`}}",
       "tools_upload_flavor": "windows",
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "1",
-        "memsize": "{{ user `memory` }}",
-        "numvcpus": "{{ user `cpus` }}",
-        "scsi0.virtualDev": "lsisas1068"
-      },
-      "vmx_remove_ethernet_interfaces": "true",
-      "winrm_password": "vagrant",
+      "winrm_password": "{{ user `winrm_password` }}",
       "winrm_timeout": "10000s",
-      "winrm_username": "vagrant"
+      "winrm_username": "{{ user `winrm_username` }}"
     } 
-  ],
-  "post-processors": [
-    {
-      "compression_level": 1,
-      "keep_input_artifact": false,
-      "output": "box/{{.Provider}}/{{user `vm_name`}}.box",
-      "type": "vagrant",
-      "vagrantfile_template": "{{user `vagrantfile_template` }}"
-    }
   ],
   "provisioners": [
     {
@@ -52,21 +37,37 @@
         "script/vmware.ps1"
       ],
       "type": "powershell"
+    },
+    {
+      "type": "windows-restart"
+    },
+    {
+      "type": "powershell",
+      "inline": ["sleep 20"]
+    },
+    {
+      "elevated_user": "{{ user `winrm_username` }}",
+      "elevated_password": "{{ user `winrm_password` }}",
+      "scripts": [
+        "script/cleanup.ps1"
+      ],
+      "type": "powershell"
     }
   ],
   "variables": {
-    "autounattend": "floppy/eval-win2012r2-datacenter/autounattend.xml",
+    "autounattend": "floppy/eval-win2016/datacenter/autounattend.xml",
     "cpus": "2",
     "disk_size": "40960",
-    "guest_os_type": "windows8srv-64",
-    "iso_checksum": "6612b5b1f53e845aacdf96e974bb119a3d9b4dcb5b82e65804ab7e534dc7b4d5",
+    "guest_os_type": "windows9srv-64",
+    "iso_checksum": "1ce702a578a3cb1ac3d14873980838590f06d5b7101c5daaccbac9d73f1fb50f",
     "iso_checksum_type": "sha256",
-    "iso_name": "9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.ISO",
+    "iso_name": "Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
     "iso_path": "iso",
-    "iso_url": "http://care.dlservice.microsoft.com/dl/download/6/2/A/62A76ABB-9990-4EFC-A4FE-C7D698DAEB96/9600.17050.WINBLUE_REFRESH.140317-1640_X64FRE_SERVER_EVAL_EN-US-IR3_SSS_X64FREE_EN-US_DV9.ISO",
+    "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
     "memory": "4096",
     "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
-    "vagrantfile_template": "tpl/vagrantfile-eval-win2012r2-datacenter.tpl",
-    "vm_name": "eval-win2012r2-datacenter"
+    "vm_name": "eval-win2016-datacenter-sysprep",
+    "winrm_password": "vagrant",
+    "winrm_username": "vagrant"
   }
 }
