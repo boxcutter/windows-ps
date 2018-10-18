@@ -18,7 +18,7 @@
                     </InstallFrom>
                     <InstallTo>
                         <DiskID>0</DiskID>
-                        <PartitionID>1</PartitionID>
+                        <PartitionID>2</PartitionID>
                     </InstallTo>
                 </OSImage>
             </ImageInstall>
@@ -47,7 +47,7 @@
                             <Format>NTFS</Format>
                             <Letter>C</Letter>
                             <Order>1</Order>
-                            <PartitionID>1</PartitionID>
+                            <PartitionID>2</PartitionID>
                         </ModifyPartition>
                     </ModifyPartitions>
                     <DiskID>0</DiskID>
