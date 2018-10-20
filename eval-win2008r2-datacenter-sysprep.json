@@ -1,9 +1,10 @@
 {
-  "_comment": "Build with `packer build -var-file=eval-win2008r2-sysprep.json windows-sysprep.json`",
-  "vm_name": "eval-win2016-datacenter-sysprep",
+  "_comment": "Build with `packer build -var-file=eval-win2008r2-datacenter-sysprep.json windows-sysprep.json`",
+  "vm_name": "eval-win2012r2-datacenter-sysprep",
   "cpus": "2",
-  "memory": "8096",
+  "memory": "4096",
   "disk_size": "40000",
+  "guest_os_type": "windows7srv-64",
   "autounattend": "answer/eval-win2008r2/datacenter/autounattend.xml",
   "iso_checksum": "30832ad76ccfa4ce48ccb936edefe02079d42fb1da32201bf9e3a880c8ed6312",
   "iso_name": "7601.17514.101119-1850_x64fre_server_eval_en-us-GRMSXEVAL_EN_DVD.iso",

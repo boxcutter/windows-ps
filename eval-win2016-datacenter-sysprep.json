@@ -2,10 +2,10 @@
   "_comment": "Build with `packer build -var-file=eval-win2016-datacenter-sysprep.json windows-sysprep.json`",
   "vm_name": "eval-win2016-datacenter-sysprep",
   "cpus": "2",
-  "memory": "8096",
+  "memory": "4096",
   "disk_size": "40000",
   "guest_os_type": "windows9srv-64",
-  "autounattend": "floppy/eval-win2016/datacenter/autounattend.xml",
+  "autounattend": "answer/eval-win2016/datacenter/autounattend.xml",
   "iso_checksum": "1ce702a578a3cb1ac3d14873980838590f06d5b7101c5daaccbac9d73f1fb50f",
   "iso_name": "Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
   "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO"

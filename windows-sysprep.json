@@ -21,7 +21,7 @@
       ],
       "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
       "shutdown_command": "{{ user `shutdown_command`}}",
-      "tools_upload_flavor": "windows",
+      "tools_upload_flavor": "",
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
       "vmx_data": {
@@ -29,7 +29,7 @@
         "memsize": "{{ user `memory` }}",
         "numvcpus": "{{ user `cpus` }}",
         "scsi0.virtualDev": "lsisas1068",
-        "virtualHW.version": "10"
+        "virtualHW.version": "{{ user `virtual_hw_version` }}"
       },
       "winrm_password": "{{ user `winrm_password` }}",
       "winrm_timeout": "10000s",
@@ -71,7 +71,7 @@
   "variables": {
     "autounattend": "floppy/eval-win2016/datacenter/autounattend.xml",
     "cpus": "2",
-    "disk_size": "40960",
+    "disk_size": "40000",
     "guest_os_type": "windows9srv-64",
     "iso_checksum": "1ce702a578a3cb1ac3d14873980838590f06d5b7101c5daaccbac9d73f1fb50f",
     "iso_checksum_type": "sha256",
@@ -80,6 +80,7 @@
     "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
     "memory": "4096",
     "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+    "virtual_hw_version": "9",
     "vm_name": "eval-win2016-datacenter-sysprep",
     "winrm_password": "vagrant",
     "winrm_username": "vagrant"

@@ -1,13 +1,12 @@
-Write-Output "==> Installing VMware Tools"
-$isoPath = $Home, "windows.iso" -join "\"
-Write-Output $isoPath
-
-Mount-DiskImage -ImagePath $isoPath
-$driveLetter = (Get-DiskImage $isoPath | Get-Volume).DriveLetter
+$url = "https://packages.vmware.com/tools/releases/latest/windows/x64/VMware-tools-10.3.2-9925305-x86_64.exe"
+$vmware_setup = "$($env:TEMP)\vmware_setup.exe"
+Write-Host "Downloading VMware Tools..."
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile($url, $vmware_setup)
 
 Write-Host "Installing VMWare Tools..."
-$setupPath = -join($driveLetter, ":\setup.exe")
-$p = Start-Process -Wait -PassThru -FilePath $setupPath -ArgumentList "/S /l C:\Windows\Temp\vmware_tools.log /v""/qn REBOOT=R"""
+# $p = Start-Process -Wait -PassThru -FilePath d:\setup.exe -ArgumentList "/S /l C:\Windows\Temp\vmware_tools.log /v""/qn REBOOT=R"""
+$p = Start-Process -Wait -PassThru -FilePath $vmware_setup -ArgumentList "/S /l C:\Windows\Temp\vmware_tools.log /v""/qn REBOOT=R"""
 
 if ($p.ExitCode -eq 0) {
   Write-Host "Done."
@@ -18,5 +17,3 @@ if ($p.ExitCode -eq 0) {
   Start-Sleep 2; exit $p.ExitCode
 }
 
-Write-Output "Unmounting $driveLetter"
-# Get-Volume ($driveLetter.Replace(":\","")) | Get-DiskImage | Dismount-DiskImage
