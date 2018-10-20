@@ -34,24 +34,25 @@
                             <Type>Primary</Type>
                         </CreatePartition>
                         <CreatePartition wcm:action="add">
+                            <Extend>true</Extend>
                             <Order>2</Order>
-                            <Size>20000</Size>
                             <Type>Primary</Type>
                         </CreatePartition>
                     </CreatePartitions>
                     <ModifyPartitions>
                         <ModifyPartition wcm:action="add">
-                            <Extend>true</Extend>
+                            <Active>true</Active>
                             <Format>NTFS</Format>
-                            <Letter>C</Letter>
-                            <Order>2</Order>
-                            <PartitionID>2</PartitionID>
-                        </ModifyPartition>
-                        <ModifyPartition wcm:action="add">
                             <Label>System</Label>
                             <Order>1</Order>
                             <PartitionID>1</PartitionID>
-                            <Extend>false</Extend>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
+                            <Format>NTFS</Format>
+                            <Label>Windows</Label>
+                            <Letter>C</Letter>
+                            <Order>2</Order>
+                            <PartitionID>2</PartitionID>
                         </ModifyPartition>
                     </ModifyPartitions>
                     <DiskID>0</DiskID>
