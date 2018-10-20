@@ -1,2 +1,2 @@
 Write-Output "=> Starting Transport Services"
-net start winrm
+Get-Service winrm | Start-Service

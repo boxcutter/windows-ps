@@ -28,11 +28,11 @@
   ],
   "post-processors": [
     {
-      "compression_level": 1,
+      "compression_level": 9,
       "keep_input_artifact": false,
       "output": "box/{{.Provider}}/{{user `vm_name`}}.box",
       "type": "vagrant",
-      "vagrantfile_template": "tpl/vagrantfile-eval-win2016-datacenter.tpl"
+      "vagrantfile_template": "vagrantfile-windows.tpl"
     }
   ],
   "provisioners": [

@@ -86,7 +86,7 @@
             </AutoLogon>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\00-run-all-scripts.ps1</CommandLine>
+                    <CommandLine>cmd.exe /c powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\00-run-all-scripts.ps1</CommandLine>
                     <Description>Run scripts during the sysprep phase</Description>
                     <Order>10</Order>
                     <RequiresUserInput>true</RequiresUserInput>

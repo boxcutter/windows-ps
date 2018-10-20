@@ -28,7 +28,8 @@
         "cpuid.coresPerSocket": "1",
         "memsize": "{{ user `memory` }}",
         "numvcpus": "{{ user `cpus` }}",
-        "scsi0.virtualDev": "lsisas1068"
+        "scsi0.virtualDev": "lsisas1068",
+        "virtualHW.version": "10"
       },
       "winrm_password": "{{ user `winrm_password` }}",
       "winrm_timeout": "10000s",
@@ -43,6 +44,13 @@
         "script/vmware.ps1"
       ],
       "type": "powershell"
+    },
+    {
+      "type": "windows-restart"
+    },
+    {
+      "type": "powershell",
+      "inline": ["sleep 20"]
     },
     {
       "type": "windows-restart"
