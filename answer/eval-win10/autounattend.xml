@@ -51,6 +51,7 @@
                             <Label>System</Label>
                             <Order>1</Order>
                             <PartitionID>1</PartitionID>
+                            <Extend>false</Extend>
                         </ModifyPartition>
                     </ModifyPartitions>
                     <DiskID>0</DiskID>
