@@ -42,7 +42,7 @@
                     <ModifyPartitions>
                         <ModifyPartition wcm:action="add">
                             <Active>true</Active>
-                            <Label>System Reserved</Label>
+                            <Label>System</Label>
                             <Order>1</Order>
                             <PartitionID>1</PartitionID>
                         </ModifyPartition>
@@ -83,8 +83,8 @@
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
                         <Password>
-                            <Value>dgBhAGcAcgBhAG4AdABQAGEAcwBzAHcAbwByAGQA</Value>
-                            <PlainText>false</PlainText>
+                            <Value>vagrant</Value>
+                            <PlainText>true</PlainText>
                         </Password>
                         <DisplayName>Vagrant User</DisplayName>
                         <Group>Administrators</Group>
@@ -94,8 +94,8 @@
             </UserAccounts>
             <AutoLogon>
                 <Password>
-                    <Value>dgBhAGcAcgBhAG4AdABQAGEAcwBzAHcAbwByAGQA</Value>
-                    <PlainText>false</PlainText>
+                    <Value>vagrant</Value>
+                    <PlainText>true</PlainText>
                 </Password>
                 <Enabled>true</Enabled>
                 <Username>vagrant</Username>
