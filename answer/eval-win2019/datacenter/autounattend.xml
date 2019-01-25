@@ -35,8 +35,8 @@
                         </CreatePartition>
                         <CreatePartition wcm:action="add">
                             <Order>2</Order>
+                            <Size>20000</Size>
                             <Type>Primary</Type>
-                            <Extend>true</Extend>
                         </CreatePartition>
                     </CreatePartitions>
                     <ModifyPartitions>
@@ -44,10 +44,11 @@
                             <Active>true</Active>
                             <Format>NTFS</Format>
                             <Label>System Reserved</Label>
-                            <Order>1</Order>
                             <PartitionID>1</PartitionID>
+                            <Order>1</Order>
                         </ModifyPartition>
                         <ModifyPartition wcm:action="add">
+                            <Extend>true</Extend>
                             <Format>NTFS</Format>
                             <Letter>C</Letter>
                             <Order>2</Order>
@@ -62,14 +63,6 @@
     </settings>
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <AutoLogon>
-                <Password>
-                    <Value>vagrant</Value>
-                    <PlainText>true</PlainText>
-                </Password>
-                <Enabled>true</Enabled>
-                <Username>vagrant</Username>
-            </AutoLogon>
             <UserAccounts>
                 <AdministratorPassword>
                     <Value>vagrant</Value>
@@ -88,11 +81,20 @@
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>
+            <AutoLogon>
+                <Password>
+                    <Value>vagrant</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <Username>vagrant</Username>
+            </AutoLogon>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File a:\00-run-all-scripts.ps1</CommandLine>
                     <Description>Run all scripts on drive A:</Description>
                     <Order>10</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
             </FirstLogonCommands>
         </component>
@@ -116,10 +118,6 @@
                     <Profile>all</Profile>
                 </FirewallGroup>
             </FirewallGroups>
-        </component>
-        <component name="Microsoft-Windows-TerminalServices-RDP-WinStationExtensions" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <SecurityLayer>1</SecurityLayer>
-            <UserAuthentication>0</UserAuthentication>
         </component>
     </settings>
     <cpi:offlineImage cpi:source="catalog:c:/windows-ps/wsim/eval-win2019/install_windows server 2019 serverdatacenter.clg" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
