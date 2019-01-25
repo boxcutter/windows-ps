@@ -37,6 +37,7 @@
                             <Order>2</Order>
                             <Size>20000</Size>
                             <Type>Primary</Type>
+                            <Extend>true</Extend>
                         </CreatePartition>
                     </CreatePartitions>
                     <ModifyPartitions>
@@ -48,7 +49,7 @@
                             <PartitionID>1</PartitionID>
                         </ModifyPartition>
                         <ModifyPartition wcm:action="add">
-                            <Active>true</Active>
+                            <Active>false</Active>
                             <Format>NTFS</Format>
                             <Letter>C</Letter>
                             <Order>2</Order>
