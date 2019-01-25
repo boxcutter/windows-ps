@@ -1,0 +1,13 @@
+{
+  "_comment": "Build with `packer build -var-file=eval-win2019-datacenter-sysprep.json windows-sysprep.json`",
+  "vm_name": "eval-win2019-datacenter-sysprep",
+  "cpus": "2",
+  "memory": "4096",
+  "disk_size": "40000",
+  "guest_os_type": "windows9srv-64",
+  "virtual_hw_version": "10",
+  "autounattend": "answer/eval-win2019/datacenter/autounattend.xml",
+  "iso_checksum": "57faf4a2ea4484cfdf5e964c539313c061c4d9cac474e723d60405f2ea02d570",
+  "iso_name": "17763.253.190108-0006.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso",
+  "iso_url": "https://software-download.microsoft.com/download/sg/17763.253.190108-0006.rs5_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso"
+}
