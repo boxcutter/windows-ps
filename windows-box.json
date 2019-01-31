@@ -46,8 +46,8 @@
     }
   ],
   "variables": {
-    "source_path": "output-eval-win2016-datacenter-windows-update-vmware-iso/eval-win2016-datacenter-windows-update.vmx",
-    "vm_name": "eval-win2016-datacenter",
+    "source_path": "output-eval-win2019-datacenter-windows-update-vmware-iso/eval-win2019-datacenter-windows-update.vmx",
+    "vm_name": "eval-win2019-datacenter",
     "winrm_password": "vagrant",
     "winrm_username": "vagrant"
   }

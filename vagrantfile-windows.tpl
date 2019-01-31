@@ -6,6 +6,7 @@ Vagrant.configure(2) do |config|
   config.vm.communicator = "winrm"
   config.vm.boot_timeout = 300
   config.vm.network :forwarded_port, guest: 3389, host: 3389, id: 'rdp', auto_correct: true
+  config.vm.synced_folder '.', '/vagrant', disabled: true
 
   ["vmware_fusion", "vmware_workstation"].each do |provider|
     config.vm.provider provider do |v, override|

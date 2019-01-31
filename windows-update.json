@@ -64,8 +64,8 @@
     }
   ],
   "variables": {
-    "source_path": "output-eval-win2016-datacenter-sysprep-vmware-iso/eval-win2016-datacenter-sysprep.vmx",
-    "vm_name": "eval-win2016-datacenter-windows-update",
+    "source_path": "output-eval-win2019-datacenter-sysprep-vmware-iso/eval-win2019-datacenter-sysprep.vmx",
+    "vm_name": "eval-win2019-datacenter-windows-update",
     "winrm_password": "vagrant",
     "winrm_username": "vagrant"
   }
