@@ -1,6 +1,6 @@
 {
-  "_comment": "Build with `packer build -var-file=eval-win2019-datacenter-sysprep.json windows-sysprep.json`",
-  "vm_name": "eval-win2019-datacenter-sysprep",
+  "_comment": "Build with `packer build -var-file=eval-win2019-datacenter.json windows.json`",
+  "vm_name": "eval-win2019-datacenter",
   "cpus": "2",
   "memory": "4096",
   "disk_size": "40000",

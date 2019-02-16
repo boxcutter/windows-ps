@@ -1,0 +1,146 @@
+{
+    "builders": [
+      {
+        "communicator": "winrm",
+        "disk_size": "{{ user `disk_size` }}",
+        "floppy_files": [
+          "{{ user `autounattend` }}",
+          "floppy/00-run-all-scripts.ps1",
+          "floppy/disable-windows-update.ps1",
+          "floppy/install-winrm.ps1",
+          "floppy/power-settings.ps1",
+          "floppy/zz-start-transports.ps1"
+        ],
+        "guest_os_type": "{{ user `guest_os_type` }}",
+        "headless": "{{ user `headless` }}",
+        "iso_checksum": "{{ user `iso_checksum` }}",
+        "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+        "iso_urls": [
+          "{{ user `iso_path` }}/{{ user `iso_name` }}",
+          "{{ user `iso_url` }}"
+        ],
+        "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
+        "shutdown_command": "{{ user `shutdown_command`}}",
+        "tools_upload_flavor": "",
+        "type": "vmware-iso",
+        "vm_name": "{{ user `vm_name` }}",
+        "vmx_data": {
+          "cpuid.coresPerSocket": "1",
+          "memsize": "{{ user `memory` }}",
+          "numvcpus": "{{ user `cpus` }}",
+          "scsi0.virtualDev": "lsisas1068",
+          "virtualHW.version": "{{ user `virtual_hw_version` }}"
+        },
+        "winrm_password": "{{ user `winrm_password` }}",
+        "winrm_timeout": "10000s",
+        "winrm_username": "{{ user `winrm_username` }}"
+      } 
+    ],
+    "post-processors": [
+      {
+        "compression_level": 9,
+        "keep_input_artifact": false,
+        "output": "box/{{.Provider}}/{{user `vm_name`}}.box",
+        "type": "vagrant",
+        "vagrantfile_template": "vagrantfile-windows.tpl"
+      }
+    ],    
+    "provisioners": [
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/vmware.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "type": "windows-restart"
+      },
+      {
+        "type": "powershell",
+        "inline": ["sleep 20"]
+      },
+      {
+        "type": "windows-restart"
+      },
+      {
+        "type": "powershell",
+        "inline": ["sleep 20"]
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/windows_update.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/windows_update.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/windows_update.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/windows_update.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/cleanup.ps1"
+        ],
+        "type": "powershell"
+      }
+    ],
+    "variables": {
+      "autounattend": "floppy/eval-win2016/datacenter/autounattend.xml",
+      "cpus": "2",
+      "disk_size": "40000",
+      "guest_os_type": "windows9srv-64",
+      "iso_checksum": "1ce702a578a3cb1ac3d14873980838590f06d5b7101c5daaccbac9d73f1fb50f",
+      "iso_checksum_type": "sha256",
+      "iso_name": "Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+      "iso_path": "iso",
+      "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+      "memory": "4096",
+      "shutdown_command": "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+      "virtual_hw_version": "9",
+      "vm_name": "eval-win2016-datacenter-sysprep",
+      "winrm_password": "vagrant",
+      "winrm_username": "vagrant"
+    }
+  }
+  
