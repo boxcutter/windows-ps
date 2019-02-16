@@ -12,7 +12,8 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
     "$env:windir\logs",
     "$env:windir\panther",
     "$env:windir\temp\*",
-    "$env:windir\winsxs\manifestcache"
+    "$env:windir\winsxs\manifestcache",
+    "C:\Recovery"
 ) | % {
         if(Test-Path $_) {
             Write-Host "Removing $_"
@@ -24,12 +25,18 @@ Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase
         }
     }
 
-Write-Host "defragging..."
-if (Get-Command Optimize-Volume -ErrorAction SilentlyContinue) {
-    Optimize-Volume -DriveLetter C
-    } else {
-    Defrag.exe c: /H
-}
+Write-Host "Cleaning all event logs..."
+@(
+    "Application",
+    "Security",
+    "Setup",
+    "System"
+) | % {
+         wevtutil clear-log $_
+    }
+
+Write-Host "Removing pagefile..."
+Set-Itemproperty -path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management' -Name 'PagingFiles' -value ''
 
 Write-Host "Zeroing out empty space..."
 $FilePath="c:\zero.tmp"
