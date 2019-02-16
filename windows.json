@@ -120,7 +120,18 @@
         "elevated_user": "{{ user `winrm_username` }}",
         "elevated_password": "{{ user `winrm_password` }}",
         "scripts": [
-          "script/uninstall_windows_defender.ps1",
+          "script/uninstall_windows_defender.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
           "script/cleanup.ps1"
         ],
         "type": "powershell"

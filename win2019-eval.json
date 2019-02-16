@@ -1,6 +1,6 @@
 {
-  "_comment": "Build with `packer build -var-file=eval-win2019-datacenter.json windows.json`",
-  "vm_name": "eval-win2019-datacenter",
+  "_comment": "Build with `packer build -var-file=win2019-eval.json windows.json`",
+  "vm_name": "win2019-eval",
   "cpus": "2",
   "memory": "4096",
   "disk_size": "40000",
