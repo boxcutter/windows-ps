@@ -1,4 +1,5 @@
 $url = "https://packages.vmware.com/tools/releases/latest/windows/x64/VMware-tools-10.3.5-10430147-x86_64.exe"
+# $url = "https://packages.vmware.com/tools/releases/10.2.5/windows/x64/VMware-tools-10.2.5-8068406-x86_64.exe"
 $vmware_setup = "$($env:TEMP)\vmware_setup.exe"
 Write-Host "Downloading VMware Tools..."
 $wc = New-Object System.Net.WebClient

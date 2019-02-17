@@ -1,3 +1,13 @@
+# Sleep 90000
+
+if (-not ([string]::IsNullOrEmpty($env:WINHTTP_PROXY)))
+{
+  Write-Host "==> Setting winhttp proxy to $($env:WINHTTP_PROXY)"
+  netsh winhttp set proxy $env:WINHTTP_PROXY
+} else {
+  Write-Host "==> No winhttp proxy specified"
+}
+
 # Silence progress bars in PowerShell, which can sometimes feed back strange
 # XML data to the Packer output.
 $ProgressPreference = "SilentlyContinue"
@@ -14,7 +24,12 @@ $filePath = "$($env:TEMP)\PSWindowsUpdate.zip"
 # https://stackoverflow.com/questions/27768303/how-to-unzip-a-file-in-powershell
 $shell = New-Object -ComObject Shell.Application
 $zipFile = $shell.NameSpace($filePath)
-$destinationFolder = $shell.NameSpace("C:\Program Files\WindowsPowerShell\Modules")
+$PSVersion = $PSVersionTable.PSVersion.Major
+if ($PSVersion -lt 3) {
+  $destinationFolder = $shell.NameSpace("C:\Windows\system32\WindowsPowerShell\v1.0\Modules")
+} else {
+  $destinationFolder = $shell.NameSpace("C:\Program Files\WindowsPowerShell\Modules")
+}
 
 $copyFlags = 0x00
 $copyFlags += 0x04 # Hide progress dialogs
@@ -28,7 +43,7 @@ Write-Output "Ended PSWindowsUpdate Installation"
 
 Write-Output "Starting Windows Update Installation"
 
-Try 
+Try
 {
     Import-Module PSWindowsUpdate -ErrorAction Stop
 }

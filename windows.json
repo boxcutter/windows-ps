@@ -2,6 +2,8 @@
     "builders": [
       {
         "communicator": "winrm",
+        "cpus": "{{ user `cpus` }}",
+        "disk_adapter_type": "lsisas1068",
         "disk_size": "{{ user `disk_size` }}",
         "floppy_files": [
           "{{ user `autounattend` }}",
@@ -19,6 +21,7 @@
           "{{ user `iso_path` }}/{{ user `iso_name` }}",
           "{{ user `iso_url` }}"
         ],
+        "memory": "{{ user `memory` }}",
         "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
         "shutdown_command": "{{ user `shutdown_command`}}",
         "tools_upload_flavor": "",
@@ -26,11 +29,9 @@
         "vm_name": "{{ user `vm_name` }}",
         "vmx_data": {
           "cpuid.coresPerSocket": "1",
-          "memsize": "{{ user `memory` }}",
-          "numvcpus": "{{ user `cpus` }}",
-          "scsi0.virtualDev": "lsisas1068",
           "virtualHW.version": "{{ user `virtual_hw_version` }}"
         },
+        "vmx_remove_ethernet_interfaces": true,
         "winrm_password": "{{ user `winrm_password` }}",
         "winrm_timeout": "10000s",
         "winrm_username": "{{ user `winrm_username` }}"
@@ -59,14 +60,33 @@
       },
       {
         "type": "powershell",
-        "inline": ["sleep 20"]
+        "inline": ["sleep 60"]
       },
       {
         "type": "windows-restart"
       },
       {
         "type": "powershell",
-        "inline": ["sleep 20"]
+        "inline": ["sleep 60"]
+      },
+      {
+        "type": "windows-restart"
+      },
+      {
+        "type": "powershell",
+        "inline": ["sleep 60"]
+      },
+      {
+        "elevated_user": "{{ user `winrm_username` }}",
+        "elevated_password": "{{ user `winrm_password` }}",
+        "scripts": [
+          "script/windows_update.ps1"
+        ],
+        "type": "powershell"
+      },
+      {
+        "restart_timeout": "1h",
+        "type": "windows-restart"
       },
       {
         "elevated_user": "{{ user `winrm_username` }}",
