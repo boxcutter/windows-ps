@@ -35,7 +35,41 @@
         "winrm_password": "{{ user `winrm_password` }}",
         "winrm_timeout": "10000s",
         "winrm_username": "{{ user `winrm_username` }}"
-      } 
+      },
+      {
+        "communicator": "winrm",
+        "cpus": "{{ user `cpus` }}",
+        "disk_size": "{{ user `disk_size` }}",
+        "floppy_files": [
+          "{{ user `autounattend` }}",
+          "floppy/00-run-all-scripts.ps1",
+          "floppy/disable-windows-update.ps1",
+          "floppy/install-winrm.ps1",
+          "floppy/power-settings.ps1",
+          "floppy/zz-start-transports.ps1"
+        ],
+        "guest_additions_mode": "attach",
+			  "guest_additions_path": "C:/users/vagrant/VBoxGuestAdditions.iso",
+			  "guest_os_type": "Windows2016_64",
+        "headless": "{{ user `headless` }}",
+        "iso_checksum": "{{ user `iso_checksum` }}",
+        "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+        "iso_urls": [
+          "{{ user `iso_path` }}/{{ user `iso_name` }}",
+          "{{ user `iso_url` }}"
+        ],
+        "memory": "{{ user `memory` }}",
+        "output_directory": "output-{{ user `vm_name` }}-virtualbox-iso",
+        "shutdown_command": "{{ user `shutdown_command`}}",
+        "type": "virtualbox-iso",
+        "vboxmanage": [
+          ["modifyvm", "{{.Name}}", "--vram", "48"]
+        ],
+        "vm_name": "{{ user `vm_name` }}",
+        "winrm_password": "{{ user `winrm_password` }}",
+        "winrm_timeout": "10000s",
+        "winrm_username": "{{ user `winrm_username` }}"
+      }
     ],
     "post-processors": [
       {
@@ -51,7 +85,8 @@
         "elevated_user": "{{ user `winrm_username` }}",
         "elevated_password": "{{ user `winrm_password` }}",
         "scripts": [
-          "script/vmware.ps1"
+          "script/vmware.ps1",
+          "script/virtualbox.ps1"
         ],
         "type": "powershell"
       },

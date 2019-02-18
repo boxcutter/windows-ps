@@ -1,6 +1,6 @@
 {
-  "_comment": "Build with `packer build -var-file=eval-win2008r2-datacenter-sysprep.json windows-sysprep.json`",
-  "vm_name": "eval-win2012r2-datacenter-sysprep",
+  "_comment": "Build with `packer build -var-file=win2008r2-eval.json windows.json`",
+  "vm_name": "win2008r2-eval",
   "cpus": "2",
   "memory": "4096",
   "disk_size": "40000",

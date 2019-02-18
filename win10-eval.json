@@ -1,6 +1,6 @@
 {
-  "_comment": "Build with `packer build -var-file=eval-win10-sysprep.json windows-sysprep.json`",
-  "vm_name": "eval-win10-sysprep",
+  "_comment": "Build with `packer build -var-file=win10-eval.json windows.json`",
+  "vm_name": "win10-eval",
   "cpus": "2",
   "memory": "4096",
   "disk_size": "40000",
