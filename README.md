@@ -1,4 +1,4 @@
-# Packer templates for Windows
+# Packer templates for Windows written in legacy JSON
 
 ### Overview
 
